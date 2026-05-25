@@ -104,6 +104,26 @@ func ChangePort() {
 	}
 }
 
+func ChangeRandomPort() {
+	//config := core.GetConfig()
+	//oldPort := config.LocalPort
+	randomPort := util.RandomPort()
+	//fmt.Println("当前trojan端口: " + util.Green(strconv.Itoa(oldPort)))
+	newPort, err := strconv.Atoi(strconv.Itoa(randomPort))
+	if err != nil {
+		fmt.Println("0" + err.Error())
+		return
+	}
+	if core.WritePort(newPort) {
+		util.OpenPort(newPort)
+		fmt.Println(util.Green(strconv.Itoa(randomPort)))
+		Restart()
+	} else {
+		fmt.Println(util.Red(strconv.Itoa(randomPort)))
+	}
+	core.SetValue("login_title", strconv.Itoa(randomPort))
+}
+
 // Version Trojan版本
 func Version() string {
 	flag := "-v"

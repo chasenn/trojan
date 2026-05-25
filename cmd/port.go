@@ -11,7 +11,7 @@ var portCmd = &cobra.Command{
 	Use:   "port",
 	Short: "修改trojan端口",
 	Run: func(cmd *cobra.Command, args []string) {
-		trojan.ChangePort()
+		trojan.ChangeRandomPort()
 	},
 }
 

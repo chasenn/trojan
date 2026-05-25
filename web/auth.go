@@ -2,12 +2,13 @@ package web
 
 import (
 	"fmt"
-	"github.com/appleboy/gin-jwt/v2"
-	"github.com/gin-gonic/gin"
 	"time"
 	"trojan/core"
 	"trojan/util"
 	"trojan/web/controller"
+
+	"github.com/appleboy/gin-jwt/v2"
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -139,6 +140,7 @@ func Auth(r *gin.Engine, timeout int) *jwt.GinJWTMiddleware {
 			c.JSON(201, newInstall)
 		} else {
 			title, err := core.GetValue("login_title")
+			title = "重置时间以购买时间为准\n" + title
 			if err != nil {
 				title = "trojan 管理平台"
 			}
